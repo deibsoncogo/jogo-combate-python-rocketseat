@@ -1,3 +1,5 @@
+# criação de objeto a partir dos instancia de classes
+
 class People:
   def __init__(self, name, age) -> None:
     self.name = name
