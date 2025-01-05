@@ -1,3 +1,5 @@
+import random
+
 class Character:
   def __init__(self, name, life, level):
     self.__name = name
@@ -14,7 +16,7 @@ class Character:
     return self.__level
 
   def getDetails(self):
-    return f"\nNome: {self.getName()}\nVida: {self.getLife()}\nNível: {self.getLevel()}"
+    return f"\nNome: {self.getName()} Nível: {self.getLevel()} Vida: {self.getLife()}"
 
   def receiveAttack(self, damage):
     self.__life -= damage
@@ -23,7 +25,7 @@ class Character:
       self.__life = 0
 
   def attack(self, target):
-    damage = self.__level * 2
+    damage = random.randint(self.__level * 2, self.__level * 4)
     target.receiveAttack(damage)
     print(f"{self.getName()} atacou {target.getName()} e causou {damage} de dano!")
 
@@ -39,7 +41,7 @@ class Hero(Character):
     return f"{super().getDetails()}\nHabilidade: {self.getAbility()}"
 
   def specialAttack(self, target):
-    damage = self.__level * 5
+    damage = random.randint(self.getLevel() * 5, self.getLevel() * 8)
     target.receiveAttack(damage)
     print(f"{self.getName()} usou a habilidade especial {self.getAbility()} em {target.getName()} e causou {damage} de dano!")
 
@@ -73,7 +75,7 @@ class Game:
 
       if option == "1":
         self.hero.attack(self.enemy)
-      if option == "2":
+      elif option == "2":
         self.hero.specialAttack(self.enemy)
       else:
         print("Escolha inválida, escolha novamente")
